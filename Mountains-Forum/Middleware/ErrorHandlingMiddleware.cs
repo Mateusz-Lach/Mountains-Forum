@@ -1,4 +1,6 @@
-﻿namespace Mountains_Forum.Middleware
+﻿using Mountains_Forum.Exceptions;
+
+namespace Mountains_Forum.Middleware
 {
     public class ErrorHandlingMiddleware : IMiddleware
     {
@@ -7,6 +9,11 @@
             try
             {
                 await next.Invoke(context);
+            }
+            catch(NotFoundException ex)
+            {
+                context.Response.StatusCode = 404;
+                await context.Response.WriteAsync(ex.Message);
             }
             catch (Exception ex)
             {

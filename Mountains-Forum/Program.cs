@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IMainService, MainService>();
+builder.Services.AddScoped<ITopicService, TopicService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 builder.Services.AddDbContext<ForumDbContext>();

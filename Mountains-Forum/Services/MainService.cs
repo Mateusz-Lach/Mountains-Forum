@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mountains_Forum.Entities;
+using Mountains_Forum.Exceptions;
 using Mountains_Forum.Models;
 
 namespace Mountains_Forum.Services
@@ -36,6 +37,11 @@ namespace Mountains_Forum.Services
         public CategoryDto GetCategoryById(int id)
         {
             var category = dbContext.Categories.FirstOrDefault(f => f.Id== id);
+
+            if(category==null)
+            {
+                throw new NotFoundException("category not found");
+            }
 
             var result = mapper.Map<CategoryDto>(category);
 

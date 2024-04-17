@@ -33,9 +33,9 @@ namespace Mountains_Forum.Services
         {
             var categoryId = dbContext.Categories.FirstOrDefault(c => c.Name.ToLower() == categoryName.ToLower()).Id;
 
-            var topics = dbContext.Topics.Select(t => t.CategoryId == categoryId).ToList();
+            var topics = dbContext.Topics.Where(t => t.CategoryId == categoryId).ToList();
 
-            var result = mapper.Map<IEnumerable<TopicDto>>(topics);
+            var result = mapper.Map<List<TopicDto>>(topics);
 
             return result;
         }

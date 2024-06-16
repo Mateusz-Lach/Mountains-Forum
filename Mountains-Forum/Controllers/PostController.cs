@@ -13,7 +13,7 @@ namespace Mountains_Forum.Controllers
 
         }
         [HttpGet("{topicId}")]
-        public ActionResult GetAllPosts([FromRoute] int topicId)
+        public ActionResult GetAllPostsByTopicId([FromRoute] int topicId)
         {
             return Ok(topicId);
         }

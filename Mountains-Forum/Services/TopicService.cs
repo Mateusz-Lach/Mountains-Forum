@@ -8,6 +8,7 @@ namespace Mountains_Forum.Services
     public interface ITopicService
     {
         IEnumerable<TopicDto> GetAllTopicsById(int categoryId);
+        TopicDto GetTopicById(int categoryId, int id);
         IEnumerable<TopicDto> GetAllTopicsByCategoryName(string categoryName);
         int CreateTopic(int categoryId, CreateTopicDto dto);
     }
@@ -26,6 +27,14 @@ namespace Mountains_Forum.Services
             var topics = dbContext.Topics.Where(t => t.CategoryId == categoryId).ToList();
 
             var result = mapper.Map<List<TopicDto>>(topics);
+
+            return result;
+        }
+        public TopicDto GetTopicById(int categoryId, int id)
+        {
+            var topic = dbContext.Topics.FirstOrDefault(t => t.CategoryId == categoryId && t.Id == id);
+
+            var result = mapper.Map<TopicDto>(topic);
 
             return result;
         }

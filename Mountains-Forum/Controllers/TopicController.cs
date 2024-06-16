@@ -5,7 +5,7 @@ using Mountains_Forum.Services;
 namespace Mountains_Forum.Controllers
 {
     [ApiController]
-    [Route("mountains/category")]
+    [Route("mountains/category={categoryId}")]
     public class TopicController : ControllerBase
     {
         private readonly ITopicService _service;
@@ -13,10 +13,17 @@ namespace Mountains_Forum.Controllers
         {
             _service= service;
         }
-        [HttpGet("{categoryId}")]
+        [HttpGet]
         public ActionResult GetAllById([FromRoute] int categoryId)
         {
             var result = _service.GetAllTopicsById(categoryId);
+
+            return Ok(result);
+        }
+        [HttpGet("{id}")]
+        public ActionResult GetById(int categoryId,int id)
+        {
+            var result = _service.GetTopicById(categoryId, id);
 
             return Ok(result);
         }

@@ -15,9 +15,9 @@ namespace Mountains_Forum.Services
             this.dbContext = dbContext;
             this.mapper = mapper;
         }
-        public IEnumerable<PostDto> GetAlGetAllPostsByTopicId(int topicId)
+/*        public IEnumerable<PostDto> GetAlGetAllPostsByTopicId(int topicId)
         {
 
-        }
+        }*/
     }
 }

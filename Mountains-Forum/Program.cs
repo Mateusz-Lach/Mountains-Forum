@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IMainService, MainService>();
 builder.Services.AddScoped<ITopicService, TopicService>();
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 builder.Services.AddDbContext<ForumDbContext>();

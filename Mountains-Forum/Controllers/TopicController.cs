@@ -32,7 +32,7 @@ namespace Mountains_Forum.Controllers
         {
             var result = _service.CreateTopic(categoryId, dto);
 
-            return Created("mountains/topic", null);
+            return Created("mountains/category", null);
         }
     }
 }

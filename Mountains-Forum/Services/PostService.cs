@@ -9,6 +9,7 @@ namespace Mountains_Forum.Services
     {
         IEnumerable<PostDto> GetAlGetAllPosts(int categoryId, int topicId);
         PostDto GetPostById(int categoryId, int topicId, int postId);
+        int CreatePost(int categoryId, int topicId, CreatePostDto dto);
     }
 
     public class PostService : IPostService
@@ -36,6 +37,24 @@ namespace Mountains_Forum.Services
             var result = mapper.Map<PostDto>(post);
 
             return result;
+        }
+        public int CreatePost(int categoryId, int topicId, CreatePostDto dto)
+        {
+            var topic = dbContext.Topics.FirstOrDefault(t => t.Id == topicId && t.CategoryId == categoryId);
+
+            if(topic == null)
+            {
+                throw new NotFoundException("topic or category with this id doesn't exists");
+            }
+
+            var post = mapper.Map<Post>(dto);
+
+            post.TopicId = topicId;
+
+            dbContext.Posts.Add(post);
+            dbContext.SaveChanges();
+
+            return post.Id;
         }
     }
 }

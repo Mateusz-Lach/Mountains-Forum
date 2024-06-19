@@ -30,7 +30,7 @@ namespace Mountains_Forum.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPut]
         public ActionResult CreateCategory([FromBody] CreateCategoryDto dto)
         {
             var createdId = _service.CreateCategory(dto);

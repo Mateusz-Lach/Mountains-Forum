@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Mountains_Forum.Models;
 using Mountains_Forum.Services;
 
@@ -26,6 +27,13 @@ namespace Mountains_Forum.Controllers
             var result = postService.GetPostById(categoryId, topicId, id);
 
             return Ok(result);
+        }
+        [HttpPut]
+        public ActionResult CreatePost([FromRoute] int categoryId, [FromRoute] int topicId, [FromBody] CreatePostDto dto)
+        {
+            var result = postService.CreatePost(categoryId, topicId, dto);
+
+            return Created("mountains/category={categoryId}/topic", null);
         }
     }
 }

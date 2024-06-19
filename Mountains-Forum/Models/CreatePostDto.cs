@@ -2,12 +2,10 @@
 
 namespace Mountains_Forum.Models
 {
-    public class CreateTopicDto
+    public class CreatePostDto
     {
         [Required]
-        public string Title { get; set; }
-
-        public string? Description { get; set; }
+        public string Content { get; set; }
 
         public DateTime CreatedDate = DateTime.Now;
     }

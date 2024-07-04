@@ -10,6 +10,7 @@ namespace Mountains_Forum.Services
         IEnumerable<PostDto> GetAlGetAllPosts(int categoryId, int topicId);
         PostDto GetPostById(int categoryId, int topicId, int postId);
         int CreatePost(int categoryId, int topicId, CreatePostDto dto);
+        bool DeletePost(int categoryId, int topicId, int postId);
     }
 
     public class PostService : IPostService
@@ -55,6 +56,19 @@ namespace Mountains_Forum.Services
             dbContext.SaveChanges();
 
             return post.Id;
+        }
+        public bool DeletePost(int categoryId, int topicId, int postId)
+        {
+            var post = dbContext.Posts.FirstOrDefault(p => p.TopicId == topicId && p.Topic.CategoryId == categoryId && p.Id == postId);
+
+            if(post == null){
+                return false;
+            }
+
+            dbContext.Posts.Remove(post);
+            dbContext.SaveChanges();
+
+            return true;
         }
     }
 }

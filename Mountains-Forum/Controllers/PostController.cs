@@ -35,5 +35,16 @@ namespace Mountains_Forum.Controllers
 
             return Created("mountains/category={categoryId}/topic", null);
         }
+        [HttpDelete]
+        public ActionResult DeletePost([FromRoute] int categoryId, [FromRoute] int topicId, [FromRoute] int id)
+        {
+            var isDeleted = postService.DeletePost(categoryId, topicId, id);
+
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+            return NotFound();
+        }
     }
 }

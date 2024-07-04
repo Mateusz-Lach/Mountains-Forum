@@ -19,6 +19,8 @@ namespace Mountains_Forum
             CreateMap<CreateTopicDto, Topic>();
 
             CreateMap<CreatePostDto, Post>();
+
+            CreateMap<RegisterUserDto, User>();
         }
     }
 }

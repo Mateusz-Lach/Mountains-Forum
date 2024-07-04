@@ -10,8 +10,18 @@ namespace Mountains_Forum.Entities
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().Property(p => p.Name).IsRequired().HasMaxLength(25);
+            modelBuilder.Entity<User>().Property(p => p.Email).IsRequired();
+            modelBuilder.Entity<User>().Property(p => p.Description).HasDefaultValue("Hi, I'm new in forum!").HasMaxLength(300);
+
+            modelBuilder.Entity<Role>().Property(p => p.Name).IsRequired();
+
             modelBuilder.Entity<Category>().Property(p => p.Name).IsRequired();
 
             modelBuilder.Entity<Topic>().Property(p => p.Title).IsRequired();
